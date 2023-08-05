@@ -1,5 +1,6 @@
 package com.nafimridul.carrace;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ public class CarGameGui {
 	int height;
 	int posit=0;
 	Timer timer;
+	int score=0;
 	
 	 Set<Integer> numbers = new HashSet<>();
 //	List<ImageIcon> carImages;
@@ -37,6 +39,7 @@ public class CarGameGui {
 	
 	JLabel[] carImages;
 	JLabel changeImage;
+	JLabel  scoreLabel;
 	
 	String[] carImagePaths = {
             "resources/images/car4.png",
@@ -47,6 +50,9 @@ public class CarGameGui {
         };
 	
 	ArrayList<Integer> carpos;
+	
+	JPanel scorePanel;
+    
 	
 	
 
@@ -60,9 +66,6 @@ public class CarGameGui {
 		cars = new ArrayList<>();
 		carpos = new ArrayList<>();
 		
-		 
-		
-		
 	
 		
 		carpos.add(115);
@@ -74,7 +77,15 @@ public class CarGameGui {
 		initGui();
 		
 		
+		
 	}
+	
+	private void GameOver(int s) {
+		
+        GameOverWindow gameOverWindow = new GameOverWindow(s);
+        gameOverWindow.setVisible(true);
+	}
+
 	
 	
 	
@@ -91,7 +102,21 @@ public class CarGameGui {
         background = new JLabel("", new ImageIcon("resources/images/backgif.gif"), JLabel.CENTER);
         background.setBounds(0, 0, width, height);
         fr.add(background);
+        
+        scorePanel = new JPanel();
+        scoreLabel = new JLabel("<html><body style='border: 2px solid black; padding: 5px;'>Score " + score + "</body></html>");
+        scoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+        scorePanel.setSize(85,150);
+        scorePanel.setOpaque(false);
+        //scorePanel.setBackground(Color.GREEN);
+        //scorePanel.setLayout(null);
+        scorePanel.add(scoreLabel);
+        scorePanel.setLocation(0,500);
+        background.add(scorePanel);
 
+        
         // Setting up the car panel
         carPanel = new JPanel();
         carPanel.setSize(100, 202);
@@ -148,6 +173,12 @@ public class CarGameGui {
         // Set up a timer to update car positions and repaint the GUI
         
         timer = new Timer(speed, e -> {
+        	score++;
+        	scoreLabel.setText(
+        			"<html><div style='border: 2px solid black; padding: 5px; background-color: green;'>" +
+        	                  "Score: <br>" + score + "</div></html>");
+        	
+        	
         	boolean left = false;
         	Random randompos = new Random();
             int indexpos = randompos.nextInt(5);
@@ -165,7 +196,9 @@ public class CarGameGui {
 //            	 imagecar= carImages[i];
             	 if(car.getBounds().intersects(carPanel.getBounds())) {
              		System.out.println("GameOver");
-             	}
+             		timer.stop();
+             		GameOver(score);
+            	 }
             	
                 int newY = car.getY() + 5; // Adjust the movement speed as needed
                //int OpY = OpCarPanel.getY() + 1;
