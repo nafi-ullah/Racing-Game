@@ -35,14 +35,14 @@ git clone https://github.com/nafi-ullah/Racing-Game.git
 ## Creators
 
 This Racing Game was created by 
-1. Nafi Ullah Shafin and 
+1. Nafi Ullah Shafin
 2. Mahmudul Hasan Mridul
    
 We are passionate about game development and wanted to share our excitement with fellow gaming enthusiasts. 
 Feel free to reach out to us with any feedback, suggestions, or questions!
 
 ## View of the game
-
+![Game Window 1](resources/images/backgif.gif)
 
 
 Enjoy the thrill of racing in this Java Swing masterpiece! Thank you for playing!
