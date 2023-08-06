@@ -42,7 +42,7 @@ We are passionate about game development and wanted to share our excitement with
 Feel free to reach out to us with any feedback, suggestions, or questions!
 
 ## View of the game
-![Game Window 1](resources/images/car1.png)
+![Game Window 1](resources/images/backgif.gif)
 
 
 Enjoy the thrill of racing in this Java Swing masterpiece! Thank you for playing!
