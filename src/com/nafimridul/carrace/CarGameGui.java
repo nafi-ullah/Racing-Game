@@ -2,6 +2,8 @@ package com.nafimridul.carrace;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,8 +31,11 @@ public class CarGameGui {
 	int posit=0;
 	Timer timer;
 	int score=0;
+	private Timer timerInt;
+	private int secRem;
 	
-	 Set<Integer> numbers = new HashSet<>();
+	
+	 ArrayList<Integer> numbers;
 //	List<ImageIcon> carImages;
 	List<JLabel> cars;
 	
@@ -65,12 +70,14 @@ public class CarGameGui {
 	//	carImages = new ArrayList<>();
 		cars = new ArrayList<>();
 		carpos = new ArrayList<>();
+		numbers = new ArrayList<>();
 		
 	
 		
 		carpos.add(115);
 		carpos.add(255);
 		carpos.add(390);
+		carpos.add(1000);
 		
 		//loadCarImages();
 		
@@ -84,24 +91,138 @@ public class CarGameGui {
 		
         GameOverWindow gameOverWindow = new GameOverWindow(s);
         gameOverWindow.setVisible(true);
+        gameOverWindow.restartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameOverWindow.dispose();
+                initGui();
+                // Close the window
+            }
+        });
+        
+        gameOverWindow.closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fr.dispose();// Close the window
+            }
+        });
+        
 	}
-
 	
-	
-	
-	private void initGui()
-	{
-
+	private void StartGame() {
 		
+		
+		  timer = new Timer(speed, e -> {
+	        	score++;
+	        	scoreLabel.setText(
+	        			"<html><div style='border: 2px solid black; padding: 5px; background-color: green;'>" +
+	        	                  "Score: <br>" + score + "</div></html>");
+	        	
+	        	
+	        	boolean left = false;
+	        	Random randompos = new Random();
+	            int indexpos = randompos.nextInt(5);
+	            
+	            
+	            
+	            // Move the cars vertically (change the y-coordinate)
+	            for (int i = 0; i < 3; i++) {
+	            	
+	            	int prev= 0;
+	            	
+	            	
+	            	 JPanel car = carPanels[i];
+//	            	 JLabel imagecar;
+//	            	 imagecar= carImages[i];
+	            	 if(car.getBounds().intersects(carPanel.getBounds())) {
+	             		System.out.println("GameOver");
+	             		timer.stop();
+	             		GameOver(score);
+	            	 }
+	            	
+	                int newY = car.getY() + 5; // Adjust the movement speed as needed
+	               //int OpY = OpCarPanel.getY() + 1;
 
+	                if (newY > height) {
+	                	
+	                	carPanels[i].remove(carImages[i]);
+	                	carImages[i] = new JLabel(new ImageIcon(carImagePaths[indexpos]));
+	                    carImages[i].setBounds(0, 0, 100, 210);
+	                    carPanels[i].add(carImages[i]);
+	                	
+	                    newY = -car.getHeight() ;
+	                   
+	                    carPanels[i].add(carImages[i]);
+	                    carPanels[i].repaint();
+	                    
+	                    Random randi = new Random();
+	                    int indexi = randi.nextInt(3);
+	                    
+	                    
+	                    if(numbers.size()>3 && (indexi == 0 || indexi == 2)) {
+	                    	Integer lastElement = numbers.get(numbers.size() - 1);
+	                    	Integer PrevEl = numbers.get(numbers.size() - 2);
+	                    	
+	                    	if(indexi == 2 && lastElement == 1 && PrevEl <= 1 ) {
+		                    	indexi = 0;
+		                    	//System.out.println("Yes");	
+		                    }
+	                    	else if (indexi == 0 && lastElement == 1 && (PrevEl == 2 || PrevEl == 1)) {
+	                    		indexi = 2;
+	                    	}
+	                    	
+	                    }
+	                    numbers.add(indexi);
+	                    
+	                   
+	                    
+	                    
+	                   // System.out.println(indexi);
+	                    int posci = carpos.get(indexi);
+	                    
+//	                    if (checkCollision(car, carPanel)) {
+//	                        // Game over logic here (e.g., display a message or stop the game timer)
+//	                        //timer.stop();
+//	                        System.out.println("Game Over!");
+//	                    }
+	                    
+	      
+	                    
+	                    carPanels[i].setLocation(posci,  i*520);
 
-		fr = new JFrame("Car Racing Game");
-        fr.setLayout(null);
+	        
+	                }
 
-        // Setting up the background label
-        background = new JLabel("", new ImageIcon("resources/images/backgif.gif"), JLabel.CENTER);
+	               car.setLocation(car.getX(), newY);
+	              
+	                       
+	            }
+	            carPanel.repaint();
+	            
+	            
+	            
+	           
+	            
+	            // OpCarPanel.repaint();
+	        });
+	        timer.start();
+	        
+	}
+	
+	private void IntroWindow() {
+		
+		background = new JLabel("", new ImageIcon("resources/images/IntroGif.gif"), JLabel.CENTER);
         background.setBounds(0, 0, width, height);
         fr.add(background);
+		
+	}
+	
+	
+	private void GameWindow() {
+		
+//		background = new JLabel("", new ImageIcon("resources/images/backgif.gif"), JLabel.CENTER);
+//        background.setBounds(0, 0, width, height);
+//        fr.add(background);
         
         scorePanel = new JPanel();
         scoreLabel = new JLabel("<html><body style='border: 2px solid black; padding: 5px;'>Score " + score + "</body></html>");
@@ -166,97 +287,62 @@ public class CarGameGui {
             
         }
         
-       
-       
+		
+		
+		
+	}
+
+	
+	
+	
+	private void initGui()
+	{
+
+		
+
+
+		fr = new JFrame("Car Racing Game");
+        fr.setLayout(null);
+
+        // Setting up the background label
         
+       
+     //  GameWindow();
+       
+        // intro show
+        background = new JLabel("", new ImageIcon("resources/images/IntroGif.gif"), JLabel.CENTER);
+        background.setBounds(0, 0, width, height);
+        fr.add(background);
+        
+	     secRem= 4;
+        
+        timerInt = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secRem--;
+                if (secRem >= 0) {       
+                    
+                    System.out.println("Intro Showing");
+                } else {
+                    timerInt.stop();
+                    System.out.println("Show off");
+                    fr.remove(background);
+                    background = new JLabel("", new ImageIcon("resources/images/backgif.gif"), JLabel.CENTER);
+                    background.setBounds(0, 0, width, height);
+                    fr.add(background);
+                    GameWindow();
+                    StartGame();// Clear the image
+                }
+            }
+        });
+
+        timerInt.start();
         
         // Set up a timer to update car positions and repaint the GUI
         
-        timer = new Timer(speed, e -> {
-        	score++;
-        	scoreLabel.setText(
-        			"<html><div style='border: 2px solid black; padding: 5px; background-color: green;'>" +
-        	                  "Score: <br>" + score + "</div></html>");
+        	//StartGame();
         	
         	
-        	boolean left = false;
-        	Random randompos = new Random();
-            int indexpos = randompos.nextInt(5);
-            
-            
-            
-            // Move the cars vertically (change the y-coordinate)
-            for (int i = 0; i < 3; i++) {
-            	
-            	
-            	
-            	
-            	 JPanel car = carPanels[i];
-//            	 JLabel imagecar;
-//            	 imagecar= carImages[i];
-            	 if(car.getBounds().intersects(carPanel.getBounds())) {
-             		System.out.println("GameOver");
-             		timer.stop();
-             		GameOver(score);
-            	 }
-            	
-                int newY = car.getY() + 5; // Adjust the movement speed as needed
-               //int OpY = OpCarPanel.getY() + 1;
-
-                if (newY > height) {
-                	
-                	carPanels[i].remove(carImages[i]);
-                	carImages[i] = new JLabel(new ImageIcon(carImagePaths[indexpos]));
-                    carImages[i].setBounds(0, 0, 100, 210);
-                    carPanels[i].add(carImages[i]);
-                	
-                    newY = -car.getHeight() ;
-                   
-                    carPanels[i].add(carImages[i]);
-                    carPanels[i].repaint();
-                    
-                    Random randi = new Random();
-                    int indexi = randi.nextInt(3);
-                    System.out.println(indexi);
-                    numbers.add(indexi);
-                    int s = numbers.size();
-                    if(s==3) {
-                    	List<Integer> numberList = new ArrayList<>(numbers);
-                    	int firstNumber = numberList.get(0);
-                    	indexi = firstNumber;
-                    	numbers.clear();
-                    	continue;
-                    }
-                    
-                    int posci = carpos.get(indexi);
-                    
-//                    if (checkCollision(car, carPanel)) {
-//                        // Game over logic here (e.g., display a message or stop the game timer)
-//                        //timer.stop();
-//                        System.out.println("Game Over!");
-//                    }
-                    
-      
-                    
-                    carPanels[i].setLocation(posci,  i*520);
-
-        
-                }
-
-               car.setLocation(car.getX(), newY);
-              
-                       
-            }
-            carPanel.repaint();
-            
-            
-            
-           
-            
-            // OpCarPanel.repaint();
-        });
-        timer.start();
-        
         
        
         

@@ -8,11 +8,13 @@ import java.awt.event.ActionListener;
 public class GameOverWindow extends JFrame {
     private JLabel gameOverLabel;
     private JLabel scoreLabel;
-    private JButton closeButton;
+    public JButton closeButton;
+    public JButton restartButton;
 
     public GameOverWindow(int score) {
         setTitle("Game Over");
         setSize(400, 400);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -31,16 +33,23 @@ public class GameOverWindow extends JFrame {
                 dispose(); // Close the window
             }
         });
+        restartButton = new JButton("Restart");
+
+        
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel buttonPanel = new JPanel();
+        //JPanel RestartPanel = new JPanel();
 
         mainPanel.add(gameOverLabel, BorderLayout.CENTER);
         mainPanel.add(scoreLabel, BorderLayout.SOUTH);
 
         buttonPanel.add(closeButton);
+        buttonPanel.add(restartButton);
 
         add(mainPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+        //RestartPanel.setLocation(0,200);
+       // add(RestartPanel, BorderLayout.NORTH);
     }
 }
