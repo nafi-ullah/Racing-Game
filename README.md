@@ -34,12 +34,12 @@ Follow these steps to install and play the Racing Game:
 
 ## Creators
 
-This Racing Game was created by 
-1. Nafi Ullah Shafin
-   Reg: 2020 831 004
+This Racing Game was created by -
+1. Nafi Ullah Shafin <br>
+   Reg: 2020 831 004 <br>
    Software Engineering Department, SUST
-3. Mahmudul Hasan Mridul
-   Reg: 2020 831 005
+3. Mahmudul Hasan Mridul <br>
+   Reg: 2020 831 005 <br>
    Software Engineering Department, SUST
    
 We are passionate about game development and wanted to share our excitement with fellow gaming enthusiasts. 
@@ -56,5 +56,5 @@ https://drive.google.com/drive/folders/1Mc83gxeSZQdrW25QQqzRg0iO3Xm3URQB?usp=sha
 
 **Game Over...** <br>
 ![Game Window 3](resources/images/gameover.png)
-
+<br>
 Enjoy the thrill of racing in this Java Swing masterpiece! Thank you for playing!
