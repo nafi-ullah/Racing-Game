@@ -46,6 +46,12 @@ public class CarGameGui {
 	JLabel changeImage;
 	JLabel  scoreLabel;
 	
+	
+	
+	ArrayList<Integer> carpos;
+	
+	JPanel scorePanel;
+    
 	String[] carImagePaths = {
             "resources/images/car4.png",
             "resources/images/car2.png",
@@ -53,12 +59,6 @@ public class CarGameGui {
             "resources/images/car5.png",
             "resources/images/car6.png"
         };
-	
-	ArrayList<Integer> carpos;
-	
-	JPanel scorePanel;
-    
-	
 	
 
 	
@@ -91,6 +91,13 @@ public class CarGameGui {
 		
         GameOverWindow gameOverWindow = new GameOverWindow(s);
         gameOverWindow.setVisible(true);
+      
+        gameOverWindow.closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fr.dispose();// Close the window
+            }
+        });
         gameOverWindow.restartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,12 +107,6 @@ public class CarGameGui {
             }
         });
         
-        gameOverWindow.closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fr.dispose();// Close the window
-            }
-        });
         
 	}
 	
@@ -180,12 +181,6 @@ public class CarGameGui {
 	                   // System.out.println(indexi);
 	                    int posci = carpos.get(indexi);
 	                    
-//	                    if (checkCollision(car, carPanel)) {
-//	                        // Game over logic here (e.g., display a message or stop the game timer)
-//	                        //timer.stop();
-//	                        System.out.println("Game Over!");
-//	                    }
-	                    
 	      
 	                    
 	                    carPanels[i].setLocation(posci,  i*520);
@@ -199,11 +194,7 @@ public class CarGameGui {
 	            }
 	            carPanel.repaint();
 	            
-	            
-	            
-	           
-	            
-	            // OpCarPanel.repaint();
+
 	        });
 	        timer.start();
 	        
@@ -220,9 +211,7 @@ public class CarGameGui {
 	
 	private void GameWindow() {
 		
-//		background = new JLabel("", new ImageIcon("resources/images/backgif.gif"), JLabel.CENTER);
-//        background.setBounds(0, 0, width, height);
-//        fr.add(background);
+
         
         scorePanel = new JPanel();
         scoreLabel = new JLabel("<html><body style='border: 2px solid black; padding: 5px;'>Score " + score + "</body></html>");
@@ -304,17 +293,14 @@ public class CarGameGui {
 		fr = new JFrame("Car Racing Game");
         fr.setLayout(null);
 
-        // Setting up the background label
-        
-       
-     //  GameWindow();
-       
         // intro show
-        background = new JLabel("", new ImageIcon("resources/images/IntroGif.gif"), JLabel.CENTER);
-        background.setBounds(0, 0, width, height);
-        fr.add(background);
+        
         
 	     secRem= 4;
+	     
+	     background = new JLabel("", new ImageIcon("resources/images/IntroGif.gif"), JLabel.CENTER);
+	        background.setBounds(0, 0, width, height);
+	        fr.add(background);
         
         timerInt = new Timer(1000, new ActionListener() {
             @Override
@@ -338,13 +324,6 @@ public class CarGameGui {
 
         timerInt.start();
         
-        // Set up a timer to update car positions and repaint the GUI
-        
-        	//StartGame();
-        	
-        	
-        
-       
         
 
         fr.setSize(width, height);
