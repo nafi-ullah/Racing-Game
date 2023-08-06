@@ -22,7 +22,7 @@ The collision detection system ensures that the car interacts correctly with obs
 
 Follow these steps to install and play the Racing Game:
 
-1. **Clone the Repository:** Clone this repository to your local machine using the following command: <be>
+1. **Clone the Repository:** Clone this repository to your local machine using the following command: <br>
 <code> git clone https://github.com/nafi-ullah/Racing-Game.git </code>
 
 
