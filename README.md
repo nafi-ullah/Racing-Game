@@ -49,6 +49,8 @@ Feel free to reach out to us with any feedback, suggestions, or questions!
 https://drive.google.com/drive/folders/1Mc83gxeSZQdrW25QQqzRg0iO3Xm3URQB?usp=sharing
 
 ## Game Scenery <br>
+
+**Loading Screen...** <br>
 ![Game Window 1](resources/images/IntroGif.gif)
 
 **Game Play...** <br>
