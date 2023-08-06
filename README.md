@@ -48,13 +48,13 @@ Feel free to reach out to us with any feedback, suggestions, or questions!
 ## Game Play Video Recorded Link: <br>
 https://drive.google.com/drive/folders/1Mc83gxeSZQdrW25QQqzRg0iO3Xm3URQB?usp=sharing
 
-## Game Scenery
+## Game Scenery <br>
 ![Game Window 1](resources/images/IntroGif.gif)
 
-**Game Play...**
+**Game Play...** <br>
 ![Game Window 2](resources/images/gameplay.gif)
 
-**Game Over...**
+**Game Over...** <br>
 ![Game Window 3](resources/images/gameover.png)
 
 Enjoy the thrill of racing in this Java Swing masterpiece! Thank you for playing!
