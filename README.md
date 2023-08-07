@@ -30,7 +30,7 @@ Follow these steps to install and play the Racing Game:
 
 3. **Compile and Run:** Build and run the game by selecting the **Driver** class and clicking the "Run" button in Eclipse.
 
-4. **Play the Game:** Use the left and right arrow keys to control the car and navigate through the track. Aim for the finish line while avoiding obstacles.
+4. **Play the Game:** Use the left and right arrow keys to control the car and navigate through the track. Aim for avoid cross vehicle as much as possible.
 
 ## Creators
 
